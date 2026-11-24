@@ -1,12 +1,7 @@
 package com.api.book.bootrestbook.entities;
 
-import jakarta.persistence.*;
-
-@Entity
 public class Book {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //Auto generation
     private int id;
     private String title;
     private String author;

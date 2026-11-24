@@ -42,19 +42,19 @@ public class BookController {
         {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(list);
+        return ResponseEntity.of(Optional.of(list));
     }
 
     //get single book handler
     @GetMapping("/books/{id}")
-    public ResponseEntity<Optional<Book>> getBookById(@PathVariable("id") int id) {
+    public  ResponseEntity<Book> getBookById(@PathVariable("id") int id) {
         try {
-               Optional<Book> b = bookServices.getBookById(id);
+            Book b = bookServices.getBookById(id);
 
             if (b == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
-            return ResponseEntity.status(HttpStatus.CREATED).body(b);
+            return ResponseEntity.of(Optional.of(b));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
