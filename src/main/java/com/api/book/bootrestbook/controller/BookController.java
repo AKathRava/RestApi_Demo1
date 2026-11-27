@@ -25,7 +25,7 @@ public class BookController {
 //        b1.setId(1);
 //        b1.setTitle("Book 1");
 //        b1.setAuthor("Author 1");
-////      return "this is testing book first";
+    ////      return "this is testing book first";
 //        return b1;
 //    }
 
@@ -42,19 +42,19 @@ public class BookController {
         {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return ResponseEntity.of(Optional.of(list));
+        return ResponseEntity.status(HttpStatus.CREATED).body(list);
     }
 
     //get single book handler
     @GetMapping("/books/{id}")
-    public  ResponseEntity<Book> getBookById(@PathVariable("id") int id) {
+    public ResponseEntity<Optional<Book>> getBookById(@PathVariable("id") int id) {
         try {
-            Book b = bookServices.getBookById(id);
+            Optional<Book> b = bookServices.getBookById(id);
 
             if (b == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
-            return ResponseEntity.of(Optional.of(b));
+            return ResponseEntity.status(HttpStatus.CREATED).body(b);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
